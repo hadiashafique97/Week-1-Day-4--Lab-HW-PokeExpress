@@ -15,7 +15,11 @@ app.get('/pokemon', (req,res) =>{
         }))//line 4
 })
 
-// app.get('/pokemon/:indexOfPokemon', function(req, res){
+app.get('/pokemon/:id', (req,res)=>{
+    res.send(req.params.id)
+})
+
+// app.get('/pokemon/:id', function(req, res){
 //     res.render('Show', { //second param must be an object
 //         pokemon: allPokemon[req.params.indexOfPokemon] //there will be a variable available inside the ejs file called fruit, its value is fruits[req.params.indexOfFruitsArray]
 //     })
