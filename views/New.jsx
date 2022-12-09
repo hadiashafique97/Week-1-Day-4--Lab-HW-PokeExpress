@@ -9,12 +9,12 @@ class New extends React.Component {
         <form action='/pokemon' method='POST'>
           Name: <input type='text' name='name' />
           <br />
-          Img url: <input type='text' name='image'/>
-          <br />
+          {/* Img url: <input type='text' name='image'/>
+          <br /> */}
           <input type='submit' name='' value='Create Pokemon' />
         </form>
       </div>
-    );
+    )
   }
 }
 

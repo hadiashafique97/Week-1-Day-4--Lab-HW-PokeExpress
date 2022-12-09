@@ -12,6 +12,7 @@ class Index extends React.Component {
         
         return (
             <>
+            <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
                <h1 style ={myStyle}> See All The Pokemon </h1>
                 <ul>
                  {allPokemon.map((pokemon, i)=> { 

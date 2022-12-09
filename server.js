@@ -21,6 +21,8 @@ const app = express()
 const Pokemon = require("./models/pokemon")
 const port = 3000
 
+app.use(express.static('public'))
+
 // const manyPokemons = [
 //     { name: "bulbasaur", image: "http://img.pokemondb.net/artwork/bulbasaur" },
 //     { name: "ivysaur", image: "http://img.pokemondb.net/artwork/ivysaur" },
@@ -63,7 +65,9 @@ app.get("/pokemon/new", (req, res) => {
 
 app.post("/pokemon", (req, res) => {
   console.log('hello')
-    Pokemon.create(req.body, (error, createdPokemon) => {
+  let pokeBody = req.body
+  pokeBody.image = pokeBody.name
+    Pokemon.create(pokeBody, (error, createdPokemon) => {
         res.redirect("/pokemon");
     })
 })
