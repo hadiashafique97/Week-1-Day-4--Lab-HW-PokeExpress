@@ -6,7 +6,7 @@ const myStyle = {
     backgroundColor: '#000000',
 }
 
-class Index extends React.Component {
+class Show extends React.Component {
     render() {
         const { pokemon } = this.props
         console.log(this.props)
@@ -23,4 +23,4 @@ class Index extends React.Component {
 }
 
 
- module.exports = Index
+ module.exports = Show
