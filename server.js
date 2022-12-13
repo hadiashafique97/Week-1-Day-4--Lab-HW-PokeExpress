@@ -48,6 +48,7 @@ app.get('/', (req, res) => {
     res.send('<h4>Welcome to the Pokemon App!</h4>')
 })
 
+//Index//
 app.get("/pokemon", (req, res) => {
     Pokemon.find({}, (error, allPokemon) => {
       res.render("Index", {
@@ -62,7 +63,23 @@ app.get("/pokemon/new", (req, res) => {
     res.render("New")
 })
 
+//Delete//
+app.delete('/pokemon/:id', (req, res)=>{
+  console.log(req.params.id)
+  Pokemon.findByIdAndRemove(req.params.id, (err, data)=>{
+    res.redirect('/pokemon')
+})
+})
 
+//Update//
+
+app.put('/pokemon/:id', (req, res)=>{
+  Pokemon.findByIdAndUpdate(req.params.id, req.body, (err, allPokemon)=>{
+     console.log(allPokemon)
+      res.redirect(`/pokemon/${req.params.id}`) // redirecting to show page 
+  })
+})
+//create //
 app.post("/pokemon", (req, res) => {
   console.log('hello')
   let pokeBody = req.body
@@ -71,12 +88,7 @@ app.post("/pokemon", (req, res) => {
         res.redirect("/pokemon");
     })
 })
-app.put('/pokemon/:id', (req, res)=>{
-  Pokemon.findByIdAndUpdate(req.params.id, req.body, (err, allPokemon)=>{
-     console.log(allPokemon)
-      res.redirect(`/pokemon/${req.params.id}`) // redirecting to show page 
-  })
-})
+
 
 
 // Pokemon.insertMany(manyPokemons)
@@ -93,6 +105,7 @@ app.put('/pokemon/:id', (req, res)=>{
 //         db.close()
 //     })
 
+//EDIT//
 app.get('/pokemon/:id/edit', (req, res)=>{
   Pokemon.findById(req.params.id, (err, foundPokemon)=>{ //find the fruit
     if(!err){
@@ -108,6 +121,7 @@ app.get('/pokemon/:id/edit', (req, res)=>{
   })
 })
 
+//SHOW//
 
 app.get("/pokemon/:id", function (req, res) {
     Pokemon.findById(req.params.id, (err, foundPokemon) => {
