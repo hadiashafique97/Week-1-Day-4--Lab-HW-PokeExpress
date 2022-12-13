@@ -11,7 +11,7 @@ class New extends React.Component {
           <br />
           {/* Img url: <input type='text' name='image'/>
           <br /> */}
-          <input type='submit' name='' value='Create Pokemon' />
+          <input class="newbutton" type='submit' name='' value='Create Pokemon' />
         </form>
       </div>
     )

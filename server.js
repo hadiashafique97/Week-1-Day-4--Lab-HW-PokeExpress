@@ -4,7 +4,7 @@ const mongoose = require("mongoose")
 // Global configuration
 const mongoURI = process.env.MONGO_URI;
 const db = mongoose.connection
-
+const methodOverride = require('method-override')
 // Connect to Mongo
 mongoose.connect(mongoURI)
 
@@ -22,7 +22,7 @@ const Pokemon = require("./models/pokemon")
 const port = 3000
 
 app.use(express.static('public'))
-
+app.use(methodOverride('_method'))
 // const manyPokemons = [
 //     { name: "bulbasaur", image: "http://img.pokemondb.net/artwork/bulbasaur" },
 //     { name: "ivysaur", image: "http://img.pokemondb.net/artwork/ivysaur" },
@@ -71,6 +71,12 @@ app.post("/pokemon", (req, res) => {
         res.redirect("/pokemon");
     })
 })
+app.put('/pokemon/:id', (req, res)=>{
+  Pokemon.findByIdAndUpdate(req.params.id, req.body, (err, allPokemon)=>{
+     console.log(allPokemon)
+      res.redirect(`/pokemon/${req.params.id}`) // redirecting to show page 
+  })
+})
 
 
 // Pokemon.insertMany(manyPokemons)
@@ -86,6 +92,22 @@ app.post("/pokemon", (req, res) => {
 //     .finally(() => {
 //         db.close()
 //     })
+
+app.get('/pokemon/:id/edit', (req, res)=>{
+  Pokemon.findById(req.params.id, (err, foundPokemon)=>{ //find the fruit
+    if(!err){
+      res.render(
+        'Edit',
+      {
+        pokemon: foundPokemon //pass in the found fruit so we can prefill the form
+      }
+    );
+  } else {
+    res.send({ msg: err.message })
+  }
+  })
+})
+
 
 app.get("/pokemon/:id", function (req, res) {
     Pokemon.findById(req.params.id, (err, foundPokemon) => {
